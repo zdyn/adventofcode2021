@@ -1,10 +1,7 @@
 const input = await Deno.readTextFile("d02.txt");
-const cmds = input.split("\n").map((l) => {
-  const p = l.split(" ");
-  return {cmd: p[0], n: Number(p[1])};
-});
 let pos = 0, dep1 = 0, dep2 = 0;
-for (let {cmd, n} of cmds) {
+for (let [cmd, n] of input.split("\n").map((l) => l.split(" "))) {
+  n = Number(n);
   switch (cmd) {
     case "forward":
       pos += n;
@@ -12,7 +9,7 @@ for (let {cmd, n} of cmds) {
       break;
     case "down":
       dep1 += n;
-      break
+      break;
     case "up":
       dep1 -= n;
       break;
