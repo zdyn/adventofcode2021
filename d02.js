@@ -2,7 +2,7 @@
 
 const input = await Deno.readTextFile("d02.txt");
 const cmds = input
-  .split("\n")
+  .split(/\n/g)
   .filter((s) => s)
   .map((l) => l.split(" "));
 let pos = 0, dep1 = 0, dep2 = 0;

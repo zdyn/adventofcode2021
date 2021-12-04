@@ -2,7 +2,7 @@
 
 const input = await Deno.readTextFile("d03.txt");
 const nums = input
-  .split("\n")
+  .split(/\n/g)
   .filter((s) => s)
   .map((s) => s.split("").map(Number));
 const h = nums.length;

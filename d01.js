@@ -2,7 +2,7 @@
 
 const input = await Deno.readTextFile("d01.txt");
 const nums = input
-  .split("\n")
+  .split(/\n/g)
   .filter((s) => s)
   .map(Number);
 const increasing = (nums, size) => {
