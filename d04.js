@@ -13,8 +13,8 @@ const boards = parts
     };
     p.split(/\n/g).map((line, r) => {
       line
+        .trim()
         .split(/\s+/g)
-        .filter((s) => s)
         .forEach((n, c) => board.nums.set(Number(n), [r, 5 + c]));
     });
     return board;
