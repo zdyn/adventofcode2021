@@ -1,3 +1,5 @@
+#!/usr/bin/env -S deno run --allow-read
+
 const input = await Deno.readTextFile("d03.txt");
 const nums = input
   .split("\n")
