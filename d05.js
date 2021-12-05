@@ -10,13 +10,13 @@ const coords2 = new Set();
 const intersects = new Set();
 const intersects2 = new Set();
 pairs.forEach(([[x1, y1], [x2, y2]]) => {
-  const xd = x2 - x1;
-  const yd = y2 - y1;
+  const xd = (x2 - x1) / Math.abs(x2 - x1) || 0;
+  const yd = (y2 - y1) / Math.abs(y2 - y1) || 0;
   for (
     let i = x1, j = y1;
     ((xd >= 0 && i <= x2) || (xd <= 0 && i >= x2)) &&
     ((yd >= 0 && j <= y2) || (yd <= 0 && j >= y2));
-    i += (xd / Math.abs(xd) || 0), j += (yd / Math.abs(yd) || 0)
+    i += xd, j += yd
   ) {
     const key = `${i},${j}`;
     if (!xd || !yd) {
