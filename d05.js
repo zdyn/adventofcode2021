@@ -2,8 +2,8 @@
 
 const input = await Deno.readTextFile("d05.txt");
 const pairs = input
+  .trim()
   .split(/\n/g)
-  .filter((s) => s)
   .map((l) => l.split(" -> ").map((s) => s.split(",").map(Number)));
 const coords = new Set();
 const coords2 = new Set();

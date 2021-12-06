@@ -1,7 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
 const input = await Deno.readTextFile("d04.txt");
-const parts = input.split(/\n\n/g);
+const parts = input.trim().split(/\n\n/g);
 const nums = parts[0].split(",").map(Number);
 const boards = parts
   .slice(1)
