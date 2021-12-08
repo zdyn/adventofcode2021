@@ -30,12 +30,12 @@ sum = entries.map(([signals, output]) => {
         case 4: return 4;
         case 5:
           if (o.intersection(one).size === 2) return 3;
-          else if (o.intersection(four).size === 2) return 2;
-          else return 5;
+          if (o.intersection(four).size === 2) return 2;
+          return 5;
         case 6:
           if (o.intersection(seven).size !== 3) return 6;
           if (o.intersection(four).size === 4) return 9;
-          else return 0;
+          return 0;
         case 7: return 8;
       }
     })
