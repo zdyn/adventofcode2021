@@ -16,24 +16,24 @@ Set.prototype.intersection = function(s) {
 sum = entries.map(([signals, output]) => {
   let one = null, four = null, seven = null;
   for (let signal of signals) {
-    let s = new Set(signal.split(""));
-    if (signal.length === 2) one = s;
-    else if (signal.length === 3) seven = s;
-    else if (signal.length === 4) four = s;
+    const s = new Set(signal.split(""));
+    if (s.size === 2) one = s;
+    else if (s.size === 3) seven = s;
+    else if (s.size === 4) four = s;
   }
-  return output.map((o) => {
-    o = new Set(o.split(""));
-    switch (o.size) {
+  return output.map((digit) => {
+    const s = new Set(digit.split(""));
+    switch (s.size) {
       case 2: return 1;
       case 3: return 7;
       case 4: return 4;
       case 5:
-        if (o.intersection(one).size === 2) return 3;
-        if (o.intersection(four).size === 2) return 2;
+        if (s.intersection(one).size === 2) return 3;
+        if (s.intersection(four).size === 2) return 2;
         return 5;
       case 6:
-        if (o.intersection(seven).size !== 3) return 6;
-        if (o.intersection(four).size === 4) return 9;
+        if (s.intersection(seven).size !== 3) return 6;
+        if (s.intersection(four).size === 4) return 9;
         return 0;
       case 7: return 8;
     }
