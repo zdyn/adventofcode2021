@@ -12,9 +12,8 @@ console.log(sum);
 Set.prototype.intersection = function(s) {
   return new Set([...this.values()].filter((n) => s.has(n)));
 };
-sum = 0;
 // All credit to Katherine Threlkeld.
-for (let [signals, output] of entries) {
+sum = entries.map(([signals, output]) => {
   let one = null, four = null, seven = null;
   for (let signal of signals) {
     let s = new Set(signal.split(""));
@@ -34,16 +33,13 @@ for (let [signals, output] of entries) {
           else if (o.intersection(four).size === 2) return 2;
           else return 5;
         case 6:
-          if (o.intersection(seven).size === 3) {
-            if (o.intersection(four).size === 4) return 9;
-            else return 0;
-          } else {
-            return 6;
-          }
+          if (o.intersection(seven).size !== 3) return 6;
+          if (o.intersection(four).size === 4) return 9;
+          else return 0;
         case 7: return 8;
       }
     })
     .join("");
-  sum += Number(n);
-}
+  return Number(n);
+}).reduce((agg, n) => agg + n, 0);
 console.log(sum);
