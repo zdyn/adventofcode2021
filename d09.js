@@ -19,7 +19,6 @@ const adj = (i, j) => {
 };
 const size = (i, j) => {
   if (rows[i][j] >= 9) return 0;
-  let sum = 1;
   rows[i][j] = Infinity;
   return 1 + adj(i, j).map(([r, c]) => size(r, c)).reduce((agg, n) => agg + n, 0);
 };
