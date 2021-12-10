@@ -31,4 +31,4 @@ for (let line of lines) {
   scores.push(score);
 }
 console.log(errors.map((c, i) => c * vals[i]).reduce((agg, n) => agg + n, 0));
-console.log(scores.sort((a, b) => a - b)[~~(scores.length / 2)]);
+console.log(scores.sort((a, b) => a - b)[scores.length >> 1]);
