@@ -29,7 +29,7 @@ const flash = (i, j, set) => {
   }
 };
 let count = 0, temp = 0, sum = 0;
-while (temp !== idxs.length) {
+while (temp !== idxs.length || count < 100) {
   temp = 0;
   const set = new Set();
   for (let [i, j] of idxs) oct[i][j]++;
@@ -39,8 +39,8 @@ while (temp !== idxs.length) {
     oct[i][j] = 0;
     temp++;
   }
-  sum += temp;
+  if (count < 100) sum += temp;
   count++;
-  if (count === 100) console.log(sum);
 }
+console.log(sum);
 console.log(count);
