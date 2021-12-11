@@ -6,10 +6,7 @@ const oct = input
   .split(/\n/g)
   .map((l) => l.split("").map(Number));
 const idxs = [...Array(oct.length * oct[0].length).keys()]
-  .reduce((agg, n) => {
-    agg.push([~~(n / oct[0].length), n % oct[0].length]);
-    return agg;
-  }, []);
+  .reduce((agg, n) => [...agg, [~~(n / oct[0].length), n % oct[0].length]], []);
 const adj = (i, j) => {
   return [
     [i + 1, j],
@@ -38,13 +35,12 @@ while (temp !== idxs.length) {
   for (let [i, j] of idxs) oct[i][j]++;
   for (let [i, j] of idxs) flash(i, j, set);
   for (let [i, j] of idxs) {
-    if (oct[i][j] >= 10) {
-      oct[i][j] = 0;
-      temp++;
-    }
+    if (oct[i][j] < 10) continue;
+    oct[i][j] = 0;
+    temp++;
   }
-  count++;
   sum += temp;
+  count++;
   if (count === 100) console.log(sum);
 }
 console.log(count);
