@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read
 
-const input = await Deno.readTextFile("d07.txt")
+const input = await Deno.readTextFile("d07.txt");
 const positions = input.trim().split(",").map(Number);
 let s1 = Infinity, s2 = Infinity;
 let max = Math.max(...positions);

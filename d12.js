@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read
 
-const input = await Deno.readTextFile("d12.txt")
+const input = await Deno.readTextFile("d12.txt");
 const map = input
   .trim()
   .split(/\n/g)
