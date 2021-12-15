@@ -10,7 +10,6 @@ const adj = (i, j) => {
     [i, j - 1],
   ];
 };
-const key = (x, y) => `${x}x${y}`;
 const cave = input.trim().split(/\n/g).map((l) => l.split("").map(Number));
 const cave2 = [...Array(cave.length * 5).keys()].map((i) => {
   return [...Array(cave.length * 5).keys()].map((j) => {
@@ -19,23 +18,19 @@ const cave2 = [...Array(cave.length * 5).keys()].map((i) => {
   });
 });
 const minSum = (cave) => {
-  const agg = [...Array(cave.length).keys()].map(() => {
-    return [...Array(cave.length).keys()].map(() => Infinity);
-  });
+  const agg = cave.map((row) => row.map(() => Infinity));
   agg[0][0] = cave[0][0];
   while (true) {
     let changes = 0;
     for (let i = 0; i < cave.length; i++) {
       for (let j = 0; j < cave.length; j++) {
         for (let [r, c] of adj(i, j)) {
-          if (r < 0 || c < 0 || r >= cave.length || c >= cave.length) continue;
           if (
-            (agg[i][j] === Infinity && agg[r][c] !== Infinity) ||
-            agg[r][c] + cave[i][j] < agg[i][j]
-          ) {
-            changes++;
-            agg[i][j] = agg[r][c] + cave[i][j];
-          }
+            r < 0 || c < 0 || r >= cave.length || c >= cave.length ||
+            agg[r][c] === Infinity || agg[i][j] <= agg[r][c] + cave[i][j]
+          ) continue;
+          changes++;
+          agg[i][j] = agg[r][c] + cave[i][j];
         }
       }
     }
