@@ -22,23 +22,15 @@ const cave2 = [...Array(cave.length * 5).keys()].map((i) => {
   });
 });
 const minSum = (cave) => {
-  // Keeps track of changed cells. Using a set would require transforming the
-  // tuples to a valid key, which is much slower.
-  let changed = [];
   // agg will eventually represent the minimum distances from 0,0.
   const agg = cave.map((row) => row.map(() => Infinity));
   agg[0][0] = cave[0][0];
-  // Do a first pass using just down and right "movements".
+  // Keeps track of changed cells. Using a set would require transforming the
+  // tuples to a valid key, which is much slower.
+  let changed = [];
   for (let i = 0; i < cave.length; i++) {
     for (let j = 0; j < cave.length; j++) {
       changed.push([i, j]);
-      for (let [r, c] of adj(i, j)) {
-        // Ignore out-of-bounds neighbors.
-        if (r < 0 || c < 0 || r >= cave.length || c >= cave.length) continue;
-        // For the first pass, ignore down and right neighbors.
-        if (r > i || c > j) continue;
-        agg[i][j] = Math.min(agg[i][j], agg[r][c] + cave[i][j]);
-      }
     }
   }
   // Repeat passes for changed cells until cells stop changing.
