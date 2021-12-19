@@ -89,7 +89,7 @@ while (queue.length > 0) {
 
 // Part 1.
 const coordSet = new Set(
-  scanners.reduce((agg, sc) => [...agg, ...sc.map(key)], [])
+  scanners.reduce((agg, beacons) => [...agg, ...beacons.map(key)], [])
 );
 console.log(coordSet.size);
 
