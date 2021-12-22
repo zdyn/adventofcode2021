@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read
 
-// 323ms
+// 114ms
 const input = await Deno.readTextFile("d22.txt");
 
 // Returns a 3-bit integer to represent 5 states.
@@ -51,8 +51,20 @@ const breakDown = (block, cmps) => {
     let next = [];
     for (let block of blocks) {
       const xS = state(block.xMin, block.xMax, cmp.xMin, cmp.xMax);
+      if (xS === 0) {
+        next.push(block);
+        continue;
+      }
       const yS = state(block.yMin, block.yMax, cmp.yMin, cmp.yMax);
+      if (yS === 0) {
+        next.push(block);
+        continue;
+      }
       const zS = state(block.zMin, block.zMax, cmp.zMin, cmp.zMax);
+      if (zS === 0) {
+        next.push(block);
+        continue;
+      }
       next.push(...newBlocks(xS, yS, zS, block, cmp));
     }
     blocks = next;
