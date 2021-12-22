@@ -59,21 +59,6 @@ const breakDown = (block, cmps) => {
   }
   return blocks;
 };
-const onBlocks = (ranges) => {
-  let ons = [];
-  for (let range of ranges) {
-    if (range.on) {
-      ons.push(...breakDown(range, ons));
-    } else {
-      let next = [];
-      for (let on of ons) {
-        next.push(...breakDown(on, [range]));
-      }
-      ons = next;
-    }
-  }
-  return ons;
-};
 
 const ranges = input
   .trim()
@@ -91,7 +76,19 @@ const ranges = input
       zMax: limits[5],
     };
   });
-const ons = onBlocks(ranges);
+
+let ons = [];
+for (let range of ranges) {
+  if (range.on) {
+    ons.push(...breakDown(range, ons));
+  } else {
+    let next = [];
+    for (let on of ons) {
+      next.push(...breakDown(on, [range]));
+    }
+    ons = next;
+  }
+}
 
 // Part 1.
 const offs = breakDown(
