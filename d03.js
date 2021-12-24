@@ -1,34 +1,46 @@
 #!/usr/bin/env -S deno run --allow-read
 
+// 35ms
 const input = await Deno.readTextFile("d03.txt");
-const nums = input
+
+const bitsets = input
   .trim()
   .split(/\n/g)
   .map((s) => s.split("").map(Number));
-const h = nums.length;
-const w = nums[0].length;
+const height = bitsets.length;
+const width = bitsets[0].length;
+
 // Part 1.
-const counts = nums.reduce((agg, a) => agg.map((n, i) => n + a[i]), Array(w).fill(0));
-const gam = parseInt(counts.map((c) => c > h / 2 ? 1 : 0).join(""), 2);
-console.log(gam * (gam ^ (Math.pow(2, w) - 1)));
+const counts = bitsets.reduce((agg, bitset) => {
+  return agg.map((n, i) => n + bitset[i]);
+}, Array(width).fill(0));
+const gamma = parseInt(
+  counts.map((c) => c > height / 2 ? 1 : 0).join(""),
+  2,
+);
+
+console.log(gamma * (gamma ^ (Math.pow(2, width) - 1)));
+
 // Part 2.
-let ogr = nums.slice();
-for (let i = 0; ogr.length > 1 && i < w; i++) {
-  const o = [], z = [];
-  for (let num of ogr) {
-    num[i] ? o.push(num) : z.push(num);
+let oxygen = bitsets.slice();
+let co2 = bitsets.slice();
+
+for (let i = 0; oxygen.length > 1 && i < width; i++) {
+  const ones = [], zeros = [];
+  for (let bitset of oxygen) {
+    bitset[i] ? ones.push(bitset) : zeros.push(bitset);
   }
-  ogr = o.length >= z.length ? o : z;
+  oxygen = ones.length >= zeros.length ? ones : zeros;
 }
-let csr = nums.slice();
-for (let i = 0; csr.length > 1 && i < w; i++) {
-  const o = [], z = [];
-  for (let num of csr) {
-    num[i] ? o.push(num) : z.push(num);
+for (let i = 0; co2.length > 1 && i < width; i++) {
+  const ones = [], zeros = [];
+  for (let bitset of co2) {
+    bitset[i] ? ones.push(bitset) : zeros.push(bitset);
   }
-  csr = z.length <= o.length ? z : o;
+  co2 = zeros.length <= ones.length ? zeros : ones;
 }
+
 console.log(
-  parseInt(ogr[0].join(""), 2) *
-  parseInt(csr[0].join(""), 2)
+  parseInt(oxygen[0].join(""), 2) *
+  parseInt(co2[0].join(""), 2)
 );
