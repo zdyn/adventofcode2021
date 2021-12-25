@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
-// 41ms
+performance.mark("start");
+
 const input = await Deno.readTextFile("d04.txt");
 
 const parts = input
@@ -48,3 +49,7 @@ for (let num of nums) {
   }
   if (done === boards.length) break;
 }
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);

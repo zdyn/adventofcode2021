@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
-// 67ms
+performance.mark("start");
+
 const input = await Deno.readTextFile("d05.txt");
 
 // Shaves ~20ms compared to a set of strings.
@@ -62,3 +63,7 @@ console.log(coords.intersects);
 
 // Part 2.
 console.log(coords2.intersects);
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);

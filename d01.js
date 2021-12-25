@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
-// 35ms
+performance.mark("start");
+
 const input = await Deno.readTextFile("d01.txt");
 
 const increasing = (nums, size) => {
@@ -17,3 +18,7 @@ console.log(increasing(nums, 1));
 
 // Part 2.
 console.log(increasing(nums, 3));
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);

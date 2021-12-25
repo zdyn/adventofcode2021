@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
-// 34ms
+performance.mark("start");
+
 const input = await Deno.readTextFile("d02.txt");
 
 const cmds = input
@@ -32,3 +33,7 @@ console.log(position * depth1);
 
 // Part 2.
 console.log(position * depth2);
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);

@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
-// 35ms
+performance.mark("start");
+
 const input = await Deno.readTextFile("d03.txt");
 
 const bitsets = input
@@ -44,3 +45,8 @@ console.log(
   parseInt(oxygen[0].join(""), 2) *
   parseInt(co2[0].join(""), 2)
 );
+
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);

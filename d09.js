@@ -1,6 +1,9 @@
 #!/usr/bin/env -S deno run --allow-read
 
+performance.mark("start");
+
 const input = await Deno.readTextFile("d09.txt");
+
 const rows = input
   .trim()
   .split(/\n/g)
@@ -32,3 +35,7 @@ for (let i = 1; i < rows.length - 1; i++) {
 }
 console.log(sum);
 console.log(basins.sort((a, b) => b - a).slice(0, 3).reduce((agg, n) => agg * n, 1));
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);

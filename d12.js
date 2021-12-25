@@ -1,5 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read
 
+performance.mark("start");
+
 const input = await Deno.readTextFile("d12.txt");
 const map = input
   .trim()
@@ -41,3 +43,7 @@ const traverse2 = (cave, two = false, start = false) => {
   return sum;
 };
 console.log(traverse2("start", false, true));
+
+performance.mark("end");
+const duration = performance.measure("duration", "start", "end").duration;
+console.log(`duration: ${duration}ms`);
